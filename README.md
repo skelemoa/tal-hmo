@@ -11,4 +11,14 @@ This repo holds the codes and models for the  framework, introduced in the paper
 
 ["Hear Me Out: Fusional Approaches for AudioAugmented Temporal Action Localization"](https://arxiv.org/pdf/2106.14118v1.pdf).
 
-
+# Contents
+----
+* [Paper Introduction](#intro)
+* [Prerequisites](#prerequisites)
+* [Data setup](#setup)
+* [Download datasets](#data)
+* [Training](#train)
+* [Testing](#test)
+* [Other info](#other)
+    * [citation](#cite)
+    * [contact](#contact)
