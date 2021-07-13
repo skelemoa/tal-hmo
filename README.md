@@ -30,7 +30,7 @@ State  of  the  art  architectures  for  untrimmed  video  Temporal  Action  Loc
 
 ![Overview](./AVFusion.jpg)
 
-#Results
+
 ![Results](./AVfusion_results.PNG)
 
 # Prerequisites <span id = "prerequisites"> </span> 
