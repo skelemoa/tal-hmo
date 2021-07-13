@@ -30,6 +30,9 @@ State  of  the  art  architectures  for  untrimmed  video  Temporal  Action  Loc
 
 ![Overview](./AVFusion.jpg)
 
+# Results <span id = "results"> </span>
+
+The following table showcases the improvement in mAP scores due to incorporation of audio in current SOTA video-only architectures.
 
 ![Results](./AVfusion_results.PNG)
 
