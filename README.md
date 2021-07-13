@@ -29,6 +29,7 @@ This repo holds the codes and models for the  framework, introduced in the paper
 State  of  the  art  architectures  for  untrimmed  video  Temporal  Action  Localization(TAL)  have  only  considered  RGB  and  Flow  modalities,  leaving  the  information-richaudio  modality  totally  unexploited.   Audio  fusion  has  been  explored  for  the  relatedbut arguably easier problem of trimmed (clip-level) action recognition.  However, TALposes a unique set of challenges.  In this paper, we propose simple but effective fusion-based approaches for TAL. To the best of our knowledge, our work is the first to jointlyconsider audio and video modalities for supervised TAL. We experimentally show thatour schemes consistently improve performance for state of the art video-only TAL ap-proaches.   Specifically,  they  help  achieve  new  state  of  the  art  performance  on  large-scale benchmark datasets - ActivityNet-1.3 (52.73 mAP@0.5) and THUMOS14 (57.18mAP@0.5). Our experiments include ablations involving multiple fusion schemes, modality combinations and TAL architectures.
 
 ![Overview](./AVFusion.jpg)
+![Results]()
 
 # Prerequisites <span id = "prerequisites"> </span> 
 
