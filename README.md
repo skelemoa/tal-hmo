@@ -105,7 +105,7 @@ The trained models and evaluation results are put in the "results" folder.
 
 ### THUMOS14
 
-| mAP@0.5IoU (%)                    | RGB   | Audio  | RGB+Flow(encoding)     |
+| mAP@0.5IoU (%)                    | RGB   | Audio  | (RGB+VGGish(encoding))+Flow     |
 |-----------------------------------|-------|-------|---------------|
 | P-GCN (I3D)                       | 56.16 | 4.73 | 57.18  |
 
