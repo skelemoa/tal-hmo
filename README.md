@@ -107,7 +107,7 @@ The trained models and evaluation results are put in the "results" folder.
 
 | mAP@0.5IoU (%)                    | RGB   | Audio  | (RGB+Audio(encoding))+Flow     |
 |-----------------------------------|-------|-------|---------------|
-| P-GCN (I3D)                       | 56.16 | 4.73 | 57.18  |
+| MUSES                        | 56.16 | 4.73 | 57.18  |
 
 
 
