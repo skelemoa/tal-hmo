@@ -70,7 +70,32 @@ git clone --recursive https://github.com/skelemoa/tal-hmo
 
 
 # Download datasets<span id = "data"> </span>
+ Extract video features:
+ We can use pre extracted I3D features of thumos from [here](https://drive.google.com/drive/folders/1-19PgCRTTNfy2RWGErvUUlT0_3J-qEb8?usp=sharing)
+
+
+ Extract audio features:
+
+```
+python extractVGGishFeatures.py
+```
+
 [[back to top](#top)]
+
+
+# Encoding fusion:
+
+```
+python muses_fusion.py
+```
+   
+# Proposal fusion:
+
+for proposal fusion eval_detection_results.py was used, twice.
+
+First for RGB and flow, and the result was again run with Audio features.
+
+
 # Training<span id = "train"> </span>
 
 Train your own models with the following command
