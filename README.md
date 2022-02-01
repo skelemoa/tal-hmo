@@ -88,6 +88,21 @@ python extractVGGishFeatures.py
 ```
 python muses_fusion.py
 ```
+
+   GTAD RMattn:
+   
+   ```
+   python models.py
+   
+   ```
+   Muses
+   ```
+   python models_Muses.py
+   ```
+   PGCN
+   ```
+   python pgcn_models.py
+   ```
    
 # Proposal fusion:
 
