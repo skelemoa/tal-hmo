@@ -84,10 +84,15 @@ python extractVGGishFeatures.py
 
 
 # Encoding fusion:
+   GTAD for DupTrim,AvgTrim and Concat:
+   ```
+   python gtad_fusion.py
+   ```
 
-```
-python muses_fusion.py
-```
+   MUSES for DupTrim,AvgTrim and Concat:
+   ```
+   python muses_fusion.py
+   ```
 
    GTAD RMattn:
    
