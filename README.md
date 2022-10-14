@@ -156,7 +156,7 @@ The trained models and evaluation results are put in the "results" folder.
 | MUSES                        | 56.16 | 4.73 | 57.18  |
 
 
-### Best proposals:
+###Best proposals:
    proposals for each dataset to replicate our paper's results can be obtained from:
    ----
    * Best_proposals/propsAnet.zip for ActivityNetv1.3
