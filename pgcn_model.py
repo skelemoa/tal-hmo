@@ -152,6 +152,7 @@ class PGCN(torch.nn.Module):
         else:
             return self.test_forward(input)
 
+    # RM attention fusion
     def TBMRF_block(self, audio, video, nb_block, typee=1):
 
         for i in range(nb_block):
