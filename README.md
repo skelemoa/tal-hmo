@@ -9,7 +9,7 @@ Fusional approaches for temporal action localization in untrimmed videos
 
 
 <p>
-<img src = "./AVFusion.jpg" width = "1000" height = "500">  
+<img src = "./AVFusion.jpg" width = "1200" height = "400">  
 <p>
 
 This repo holds the codes and models for the  framework, introduced in the paper: 
