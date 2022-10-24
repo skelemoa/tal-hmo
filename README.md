@@ -1,11 +1,13 @@
 # AVfusion <span id = "top"></span>
 
-## tal-hmo
+## TAL-HMO
 Fusional approaches for temporal action localization in untrimmed videos
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/hear-me-out-fusional-approaches-for-audio/temporal-action-localization-on-thumos14)](https://paperswithcode.com/sota/temporal-action-localization-on-thumos14?p=hear-me-out-fusional-approaches-for-audio)
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/hear-me-out-fusional-approaches-for-audio/temporal-action-localization-on-activitynet)](https://paperswithcode.com/sota/temporal-action-localization-on-activitynet?p=hear-me-out-fusional-approaches-for-audio)
+
+![Overview](./AVFusion.jpeg)
 
 This repo holds the codes and models for the  framework, introduced in the paper: 
 
@@ -13,151 +15,90 @@ This repo holds the codes and models for the  framework, introduced in the paper
 
 # Contents
 ----
-* [Paper Introduction](#intro)
-* [Prerequisites](#prerequisites)
-* [Data setup](#setup)
-* [Download datasets](#data)
-* [Training](#train)
-* [Testing](#test)
+* [Overview](#oview)
+* [Data](#data)
+* [Fusion](#fuse)
+* [Training and Inference](#train)
 * [Best proposals](#bestprop)
 * [Other info](#other)
     * [citation](#cite)
     * [contact](#contact)
 ----
 
-# Paper Introduction <span id = "intro"> </span>
+# Overview <span id = "oview"> </span>
 
-State  of  the  art  architectures  for  untrimmed  video  Temporal  Action  Localization (TAL)  have  only  considered  RGB  and  Flow  modalities,  leaving  the  information-rich audio  modality  totally  unexploited.   Audio  fusion  has  been  explored  for  the  related but arguably easier problem of trimmed (clip-level) action recognition.  However, TAL poses a unique set of challenges.  In this paper, we propose simple but effective fusion-based approaches for TAL. To the best of our knowledge, our work is the first to jointly consider audio and video modalities for supervised TAL. We experimentally show that our schemes consistently improve performance for state of the art video-only TAL approaches.   Specifically,  they  help  achieve  new  state  of  the  art  performance  on  large-scale benchmark datasets - ActivityNet-1.3 (52.73 mAP@0.5) and THUMOS14 (57.18mAP@0.5). Our experiments include ablations involving multiple fusion schemes, modality combinations and TAL architectures.
+State  of  the  art  architectures  for  untrimmed  video  Temporal  Action  Localization (TAL)  have  only  considered  RGB  and  Flow  modalities,  leaving  the  information-rich audio  modality  totally  unexploited.   Audio  fusion  has  been  explored  for  the  related but arguably easier problem of trimmed (clip-level) action recognition.  However, TAL poses a unique set of challenges.  In this paper, we propose simple but effective fusion-based approaches for TAL. To the best of our knowledge, our work is the first to jointly consider audio and video modalities for supervised TAL. We experimentally show that our schemes consistently improve performance for state of the art video-only TAL approaches.   Specifically,  they  help  achieve  new  state  of  the  art  performance  on  large-scale benchmark datasets - **ActivityNet-1.3 (52.73 mAP@0.5)** and **THUMOS14 (57.18mAP@0.5)**. Our experiments include ablations involving multiple fusion schemes, modality combinations and TAL architectures.
 
-![Overview](./AVFusion.jpg)
+
 
 # Results <span id = "results"> </span>
 
 The following table showcases the improvement in mAP scores due to incorporation of audio in current SOTA video-only architectures.
 
-![Results](./AVfusion_results.PNG)
-
-# Prerequisites <span id = "prerequisites"> </span> 
-
-The training and testing in AVFusion is implemented in PyTorch for the ease of use. 
-
-- [PyTorch 1.8.1][pytorch]
-                   
-Other minor Python modules can be installed by running
-
-```bash
-pip install -r requirements.txt
-```
-
- The code relies on CUDA extensions. Build them with the following command:
-```
-python setup.py develop
-```
+![Results](./results.png)
  
 
 [[back to top](#top)]
 
 
+# Data<span id = "data"> </span>
+ 
+ 
+ ## Audio features: 
 
-
-
-# Data setup <span id = "setup"> </span>
-Clone this repo with git, **please remember to use --recursive**
-
-```bash
-git clone --recursive https://github.com/skelemoa/tal-hmo
-```
-[[back to top](#top)]
-
-
-# Download datasets<span id = "data"> </span>
- Extract video features:
- We can use pre extracted I3D features of thumos from [here](https://drive.google.com/drive/folders/1-19PgCRTTNfy2RWGErvUUlT0_3J-qEb8?usp=sharing)
-
-
- Extract audio features:
+ To extract the VGGish audio features use the following:
 
 ```
-python extractVGGishFeatures.py
+python extractVGGishFeatures.py --input AUDIO_FILES_PATH --output AUDIO_FEAT_PATH
 ```
+## Video features:
+ To extract the video features for THUMOS14 and ActivityNet-1.3 please refer to the documentations for the corresponding feature extractors (I3D, TSN, TSP etc.)
 
 [[back to top](#top)]
 
+# Fusion<span id = "fuse"> </span>
 
-# Encoding fusion:
-   GTAD for DupTrim,AvgTrim and Concat:
-   ```
-   python gtad_fusion.py
-   ```
+## Encoding fusion:
 
-   MUSES for DupTrim,AvgTrim and Concat:
+### Fixed<span id = "fixed"> </span>
+   For the _DupTrim_, _AvgTrim_ and _Concat_ methods, the fusion can be performed in a highly modular way, detached from the video-specific architectures. The fused features can then be used to train the respective models.
    ```
-   python muses_fusion.py
+   modular_fusion.py --type FUSION_TYPE --apath AUDIO_FEAT_PATH --vpath VIDEO_FEAT_PATH --fusedpath FUSED_FEAT_PATH
    ```
 
-   GTAD RMattn:
+### Learnable<span id = "learnf"> </span>
+   For _RMattn_, the fusion scheme has learnable parameters, and must therefore be trained as part of the existing video-specific architectures. To that end, we make minimal changes to the model definitions of the existing video-only methods to apply the learnable Residual Multimodal Attention fusion. The following can be easily plugged into the corresponding approaches and trained together with the video and audio features as inputs.
+
+   GTAD
    
    ```
-   python models.py
+   GTAD_models.py
    
    ```
    Muses
    ```
-   python models_Muses.py
+   Muses_models.py
    ```
    PGCN
    ```
-   python pgcn_models.py
+   pgcn_models.py
    ```
    
-# Proposal fusion:
+## Proposal fusion:<span id = "prop"> </span>
 
-for proposal fusion eval_detection_results.py was used, twice.
-
-First for RGB and flow, and the result was again run with Audio features.
+For proposal fusion the audio-only proposals and video-only proposals can be pooled together to generate a combined proposal pool which can be processed similarly to the corresponding video-only proposal post-processing approaches. This does not require any additional implementaion.
 
 
-# Training<span id = "train"> </span>
+# Training and Inference<span id = "train"> </span>
 
-Train your own models with the following command
-```
-python train_net.py  DATASET  --cfg CFG_PATH --snapshot_pref SNAPSHOT_PREF --epochs 20
-```
-SNAPSHOT_PREF: the path to save trained models and logs, e.g `outputs/snapshpts/thumos14_rgb/`. 
-
-We provide a script that finishes all steps on THUMOS14, including training, testing, and two-stream fusion. Run
-```
-bash scripts/do_all.sh
-```
+In order to train and test the different video-specific architectures with the fusion schemes please refer to the documentations for the corresponding approaches ([GTAD](https://github.com/frostinassiky/gtad), [Muses](https://github.com/xlliu7/MUSES), [PGCN](https://github.com/Alvin-Zeng/PGCN)).
+* For [_fixed encoding fusion_](#fixed) and [_proposal fusion_](#prop) no changes are necessary.
+* For [_learnable fusion_](#learnf), just replace the model definitions with the RM attention versions provided here, and concatenate the audio inputs to the original video inputs.  
 
 
 
-[[back to top](#top)]
-# Testing<span id = "test"> </span>
-
-You can obtain the detection scores by running 
-
-```bash
-sh test.sh TRAINING_CHECKPOINT
-```
-
-Here, `TRAINING_CHECKPOINT` denotes for the trained model.
-This script will report the detection performance in terms of [mean average precision][map] at different IoU thresholds.
-
-The trained models and evaluation results are put in the "results" folder.
-
-
-
-
-### THUMOS14
-
-| mAP@0.5IoU (%)                    | RGB   | Audio  | (RGB+Audio(encoding))+Flow     |
-|-----------------------------------|-------|-------|---------------|
-| MUSES                        | 56.16 | 4.73 | 57.18  |
-
-
-###Best proposals:
-   proposals for each dataset to replicate our paper's results can be obtained from:
+# Best proposals:  
+## Proposals to replicate the best results for each dataset :
    ----
    * Best_proposals/propsAnet.zip for ActivityNetv1.3
    * Best_proposals/propsThumos.zip for Thumos14
