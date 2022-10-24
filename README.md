@@ -7,7 +7,10 @@ Fusional approaches for temporal action localization in untrimmed videos
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/hear-me-out-fusional-approaches-for-audio/temporal-action-localization-on-activitynet)](https://paperswithcode.com/sota/temporal-action-localization-on-activitynet?p=hear-me-out-fusional-approaches-for-audio)
 
-![Overview](./AVFusion.jpg)
+
+<p>
+<img src = "./AVFusion.jpg" width = "1000" height = "500">  
+<p>
 
 This repo holds the codes and models for the  framework, introduced in the paper: 
 
